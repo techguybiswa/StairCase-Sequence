@@ -7,7 +7,7 @@
 """
 
 
-from codes_for_the_sequence.Python3.staircase_number_generator import StaircaseGenerator
+from staircase_number_generator import StaircaseGenerator
 
 def main():
     """
