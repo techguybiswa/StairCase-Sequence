@@ -7,8 +7,8 @@
   </head>
   <body>
     <h1> Easy password generator</h1>
-    <b>Input your favourite line here</b> <br><br>
-    <input type="text" id="string" value="Enter text here"></input> <br>
+    <b>Input your favourite line here (without any special charecter or number)</b> <br><br>
+    <input type="text" id="string" placeholder="Enter text here....." style="width: 700px;"></input> <br>
     <br>
     <button type="button" onclick="generate()" id="generate">Generate</button>
     <br>
@@ -42,6 +42,18 @@
           }
           var str,i=0,count;
           str = document.getElementById("string").value;
+          var wordCount = 0;
+          // the below function is for counting the number of words in the input text
+          for(var j=0;j<str.length;j++)
+          {
+            if(str[j] === " ")
+            wordCount++;
+          }
+          if(wordCount<3)
+          {
+            alert("Please enter a sentence with more than 4 words to generate password.");
+            window.location.reload();
+          }
           var wordCount1 = str.indexOf(' ');
           if(((wordCount1)>9)&&((wordCount1)<=18))
           {
