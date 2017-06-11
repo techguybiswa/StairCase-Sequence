@@ -20,6 +20,10 @@
     <h5 id="remember4"></h5>
     <h5 id="remember5"></h5>
     <h5 id="remember6"></h5>
+    <h5 id="remember7" style="display: none">
+      <i>      Could not understand how the password got generated. Press the button to try again. <br></i>
+      <button onclick="window.location.reload()">Try once again</button>
+    </h5>
 
     <br>
     <button type="button"  id="shuffle" onclick="shuffle()" style="display: none;">Shuffle 1</button>
@@ -149,7 +153,7 @@
             document.getElementById("remember4").innerHTML = "After that we concatenate " +  wordCount1 + " with " + ((wordCount1*wordCount1)+(wordCount2*wordCount2)) + " and " + wordCount2 + " to get " + numPass;
             document.getElementById("remember5").innerHTML = "To get the special charecters, press the keyboard's shift key and type " + numPass + ". You will get : " + charPass;
             document.getElementById("remember6").innerHTML = "Finally concatenate " + alphabetPass + " with " + numPass + " and " + charPass + " to get: " + finalPass;
-
+            document.getElementById("remember7").style = "display: block;"
 
 
 
