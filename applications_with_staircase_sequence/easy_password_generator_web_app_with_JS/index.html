@@ -14,24 +14,80 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
   <body>
-    <h1> Easy password generator</h1>
-    <b>Input your favourite line here (without any special charecter or number)</b> <br><br>
-    <input type="text" id="string" placeholder="Enter text here....." style="width: 700px;"></input> <br>
+    <!-- Adding navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://github.com/Bisso1998/StairCase-Sequence"><b>Easy Password Generator</b></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <div class="navbar-form navbar-right">
+            <button type="button"  onclick="location.href= 'https://github.com/Bisso1998/StairCase-Sequence'; " class="btn btn-success" >Fork me on github</button>
+            <button type="button"  onclick="location.href= 'https://github.com/Bisso1998/StairCase-Sequence'; " class="btn btn-warning" >Embedd me in your site</button>
+          </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+    <!-- end of navbar -->
+    <!-- start of jumbotron  -->
+    <div class="jumbotron" style="background-color: #dd8258; color: white">
+      <div class="container" >
+        <h1 ><b>Easy Password Generator</b></h1>
+        <br>
+        <p>Tired of generating strong passwords having upper case, lower case, numbers and special charecters?</p>
+        <p><b>TRY</b> easy password generator to generate strong and secured <i style="color: #e5c7b9">yet easy to remember</i> passwords. We use <a href="http://oeis.org/A274945" style="color: #efbca5">staircase numbers</a> to generate your passwords. </p>
+        <p><button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" >Embedd the password generator</button>
+         <button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" >Generate passwords here</button> </p>
+      </div>
+    </div>
+<!-- end of jumborton -->
+
+<!-- beginning of container class -->
+<div class="container">
+  <h2 class="text text-center text-danger"><b>Enter your favourite sentence in the text box</b></h2>
+  <h4 class="text text-center text-danger">(Text should NOT contain any number or special charecter)</h2>
+      <p class="text text-center">
+        <input class="form-control" type="text" id="string"  placeholder="Enter text here....."></input>
+      </p>
+      <button type="button" class="btn btn-block btn-warning "  onclick="generate()" id="generate">Generate</button>
+
+</div>
+<!-- end of container class -->
+
     <br>
-    <button type="button" onclick="generate()" id="generate">Generate</button>
-    <br>
-    <h3 id="password"></h3>
-    <h5 id="remember"></h5>
-    <h5 id="remember1"></h5>
-    <h5 id="remember2"</h5>
-    <h5 id="remember3"></h5>
-    <h5 id="remember4"></h5>
-    <h5 id="remember5"></h5>
-    <h5 id="remember6"></h5>
-    <h5 id="remember7" style="display: none">
-      <i>      Could not understand how the password got generated. Press the button to try again. <br></i>
-      <button onclick="window.location.reload()">Try once again</button>
-    </h5>
+
+    <div class="container" id="showBlock" style="display: none;">
+      <h3 class="text text-center text-danger"><b>YOUR PASSWORD IS</b></h3>
+      <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c">
+        <h3 class="text text-danger text-center" id="password"><b></b></h3>
+      </div>
+     <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c">
+      <h4 class="text text-center text-danger"> <b>How to remember the password? </b> </h4>
+      <ul>
+      <li><h5 id="remember0"></h5></li>
+      <li><h5 id="remember"></h5></li>
+      <li><h5 id="remember1"></h5></li>
+      <li><h5 id="remember2"</h5></li>
+      <li><h5 id="remember3"></h5></li>
+      <li><h5 id="remember4"></h5></li>
+      <li><h5 id="remember5"></h5></li>
+      <li><h5 id="remember6"></h5></li>
+     </ul>
+    </div>
+    <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c">
+      <h5 id="remember7" class="text text-center text-danger"style="display: none">
+        <i>      Could not understand how the password got generated. Press the button to try again. <br></i>
+      </h5>
+    </div>
+    <button type="button" class="btn btn-block btn-warning" onclick="window.location.reload()">Try once again</button>
+
+      <br>
+    </div>
 
     <br>
     <button type="button"  id="shuffle" onclick="shuffle()" style="display: none;">Shuffle 1</button>
