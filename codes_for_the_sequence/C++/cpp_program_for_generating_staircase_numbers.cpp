@@ -21,7 +21,7 @@ int count(int n)
     int digitCount=0;
     while (n)
     {
-        n=n/10;
+        n/=10;
         digitCount++;
     }
 return digitCount;
@@ -34,8 +34,8 @@ return digitCount;
 
 int check(int n)
 {
-    int firstDigit,lastDigit,digitCount,k;                        
-    digitCount=count(n);                    //The algorith goes like the following: 
+    int firstDigit,lastDigit,digitCount,k;
+    digitCount=count(n);                    //The algorith goes like the following:
     k=pow(10,digitCount-1);                 //1. Extract the first digit.
     firstDigit=n%10;                        //2. Extract the last digit
     lastDigit=n/k;                          //3. Extract the digits except the first and last digit
@@ -57,12 +57,17 @@ int check(int n)
 
 int main()
 {
-  int i,count=0;                         //count is for counting the total number of staircase numbers
-  
-  for(i=10000;i<100000;i++)              //Numbers from 10,000 to 100,000 are sent one by one to the function check()
+  int i,count=0,lowerBound,upperBound;    //count is for counting the total number of staircase numbers
+  cout<<"Enter lower bound: ";
+  cin>>lowerBound;
+  cout<<endl;
+  cout<<"Enter upper bound: ";
+  cin>>upperBound;
+  cout<<endl;
+  for(i=lowerBound;i<upperBound;i++)     //Numbers from 10,000 to 100,000 are sent one by one to the function check()
   {                                      //The check() functions check if the number is a staircase number
       if (check(i)==1)                   //If it is a staircase number then the function returns 1
-      {                                
+      {
           cout<<i<<" ";                  //And the number is printed in the console
           count++;                       //Also the count variable is incremented
           cout<<endl;
@@ -70,5 +75,5 @@ int main()
   }
   cout<<"Total number of staircase numbers: "<<count;   //Printing the total number of staircase numbers in the given range
   return 0;
-  
+
 }
