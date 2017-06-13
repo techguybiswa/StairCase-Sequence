@@ -12,3 +12,5 @@ Step 8: If your work is accurate and significant it will be merged to the master
 <b>You are also free to contribute your own idea or creation. And ths thing is enouraged even more.
 </b> <br>
 Feel free to mail me at: bis.banerjee.bb@gmail.com for any help or queries. <br>
+
+Happy Coding :)
