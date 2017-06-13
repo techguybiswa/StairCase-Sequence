@@ -9,10 +9,36 @@
 
       <!-- Optional theme -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+      <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+      <style media="screen">
+      #tryAgain
+      {
+        background: #EF3B36;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #FFFFFF, #EF3B36);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #FFFFFF, #EF3B36); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      }
+      #abc
+      {
+        background: #FFAFBD;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #ffc3a0, #FFAFBD);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #ffc3a0, #FFAFBD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      }
+      #password
+      {
+        font-family: 'Oswald', sans-serif;
+
+      }
+
+      </style>
   </head>
+
   <body>
     <!-- Adding navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -37,62 +63,76 @@
     <!-- start of jumbotron  -->
     <div class="jumbotron" style="background-color: #dd8258; color: white">
       <div class="container" >
-        <h1 ><b>Easy Password Generator</b></h1>
+        <h1 style="font-family: 'Fjalla One', sans-serif;"><b>Easy Password Generator</b></h1>
         <br>
         <p>Tired of generating strong passwords having upper case, lower case, numbers and special charecters?</p>
         <p><b>TRY</b> easy password generator to generate strong and secured <i style="color: #e5c7b9">yet easy to remember</i> passwords. We use <a href="http://oeis.org/A274945" style="color: #efbca5">staircase numbers</a> to generate your passwords. </p>
-        <p><button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" >Embedd the password generator</button>
-         <button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" >Generate passwords here</button> </p>
+        <p><button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" >Generate passwords now</button>
+          <button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" >Embedd the password generator</button>
+         </p>
       </div>
     </div>
 <!-- end of jumborton -->
 
 <!-- beginning of container class -->
 <div class="container">
-  <h2 class="text text-center text-danger"><b>Enter your favourite sentence in the text box</b></h2>
-  <h4 class="text text-center text-danger">(Text should NOT contain any number or special charecter)</h2>
+  <h2 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"><b>Enter your favourite sentence in the text box</b></h2>
+  <h4 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"style="font-family: 'Fjalla One', sans-serif;">(Text should NOT contain any number or special charecter)</h2>
       <p class="text text-center">
         <input class="form-control" type="text" id="string"  placeholder="Enter text here....."></input>
+        <br>
+        <button type="button" class="btn btn-block btn-warning "  onclick="generate()" id="generate">Generate</button>
       </p>
-      <button type="button" class="btn btn-block btn-warning "  onclick="generate()" id="generate">Generate</button>
-
 </div>
+
 <!-- end of container class -->
-
     <br>
-
     <div class="container" id="showBlock" style="display: none;">
-      <h3 class="text text-center text-danger"><b>YOUR PASSWORD IS</b></h3>
-      <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c">
+      <h3 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"><b>YOUR PASSWORD IS</b></h3>
+      <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c;" id="abc">
         <h3 class="text text-danger text-center" id="password"><b></b></h3>
       </div>
-     <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c">
-      <h4 class="text text-center text-danger"> <b>How to remember the password? </b> </h4>
-      <ul>
-      <li><h5 id="remember0"></h5></li>
-      <li><h5 id="remember"></h5></li>
-      <li><h5 id="remember1"></h5></li>
-      <li><h5 id="remember2"</h5></li>
-      <li><h5 id="remember3"></h5></li>
-      <li><h5 id="remember4"></h5></li>
-      <li><h5 id="remember5"></h5></li>
-      <li><h5 id="remember6"></h5></li>
-     </ul>
+        <div class="row text-center" >
+          <div class="btn btn-group">
+            <button type="button" class="btn btn-warning "  id="shuffle0" onclick="shuffle0()" style="display: none;">Original</button>
+            <button type="button" class="btn btn-warning "  id="shuffle" onclick="shuffle()" style="display: none;">Shuffle 1</button>
+            <button type="button" class="btn btn-warning "  id="shuffle2" onclick="shuffle2()" style="display: none;">Shuffle 2</button>
+            <button type="button" class="btn btn-warning "  id="shuffle3" onclick="shuffle3()" style="display: none;">Shuffle 3</button>
+            <button type="button" class="btn btn-warning "  id="shuffle4" onclick="shuffle4()" style="display: none;">Shuffle 4</button>
+            <button type="button" class="btn btn-warning "  id="shuffle5" onclick="shuffle5()" style="display: none;">Shuffle 5</button>
+          </div>
+        </div>
+        <br>
+     <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c" id="tryAgain">
+      <h4 class="text text-center" style="color:white"> <b>How to remember the password? </b> </h4>
+      <div class="row">
+      <div class="col-xs-8">
+        <ul>
+        <li><h5 id="remember0"></h5></li>
+        <li><h5 id="remember"></h5></li>
+        <li><h5 id="remember1"></h5></li>
+        <li><h5 id="remember2"</h5></li>
+        <li><h5 id="remember3"></h5></li>
+        <li><h5 id="remember4"></h5></li>
+        <li><h5 id="remember5"></h5></li>
+        <li><h5 id="remember6"></h5></li>
+       </ul>
+      </div>
+      <div class="col-xs-4">
+        <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c">
+          <h5 id="remember7" class="text text-center text-danger"style="display: none; font-family: 'Shadows Into Light Two', cursive;">
+            <i>      Could not understand how the password got generated. Press the button to try again. <br></i>
+          </h5>
+        </div>
+        <button type="button" class="btn btn-block btn-warning" onclick="window.location.reload()" id="eyeLock">Try once again</button>
+      </div>
     </div>
-    <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c">
-      <h5 id="remember7" class="text text-center text-danger"style="display: none">
-        <i>      Could not understand how the password got generated. Press the button to try again. <br></i>
-      </h5>
     </div>
-    <button type="button" class="btn btn-block btn-warning" onclick="window.location.reload()">Try once again</button>
-
       <br>
     </div>
-
     <br>
-    <button type="button"  id="shuffle" onclick="shuffle()" style="display: none;">Shuffle 1</button>
-    <button type="button"  id="shuffle2" onclick="shuffle2()" style="display: none;">Shuffle 2</button>
       <script src="password_gen.js"></script>
+      <script src="shuffle.js"></script>
       <div style="height: 150px; width: 200px">
         <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=zy5_VY_fJcOUG481iQhTXOn7945LHhCz2SwDaA4UXaI&cl=ffffff&w=a"></script>
         <!-- This script is to keep a count of the users -->

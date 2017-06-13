@@ -4,6 +4,7 @@ var charPass;
 var flag=0;
 
   function generate() {
+
     if(flag===1)
     {
       alphabetPass = [];
@@ -121,36 +122,13 @@ var flag=0;
       document.getElementById("remember5").innerHTML = "To get the special charecters, press the keyboard's shift key and type " + numPass + ". You will get : " + charPass;
       document.getElementById("remember6").innerHTML = "Finally concatenate " + alphabetPass + " with " + numPass + " and " + charPass + " to get: " + finalPass;
       document.getElementById("remember7").style = "display: block;"
-
-
-
-      // document.getElementById("generate").style.display = "none";
+      document.getElementById("shuffle0").style.display = "block";
       document.getElementById("shuffle").style.display = "block";
       document.getElementById("shuffle2").style.display = "block";
+      document.getElementById("shuffle3").style.display = "block";
+      document.getElementById("shuffle4").style.display = "block";
+      document.getElementById("shuffle5").style.display = "block";
       flag=1;
-  }
-  function shuffle()
-  {
-    var finalPass = [];
-    finalPass.push(numPass);
-    finalPass.push(alphabetPass);
-    finalPass.push(charPass);
-    finalPass = finalPass.join("");
-    console.log("Final password is: " + finalPass);
-    document.getElementById("password").innerHTML = "Your password is: "  + finalPass;
-
-  }
-  function shuffle2()
-  {
-    var finalPass = [];
-    finalPass.push(numPass);
-    finalPass.push(charPass);
-    finalPass.push(alphabetPass);
-    finalPass = finalPass.join("");
-    console.log("Final password is: " + finalPass);
-    document.getElementById("password").innerHTML = "Your password is: "  + finalPass;
-  }
-  function advancedShuffle()
-  {
+      window.location.href = "#showBlock";
 
   }
