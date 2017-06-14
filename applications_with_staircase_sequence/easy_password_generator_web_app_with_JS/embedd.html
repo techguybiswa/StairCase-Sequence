@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Easy password generator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 
     <!-- adding bootstrap CDN -->
 
@@ -59,92 +58,18 @@
         <div id="navbar" class="navbar-collapse collapse">
           <div class="navbar-form navbar-right">
             <button type="button"  onclick="location.href= 'https://github.com/Bisso1998/StairCase-Sequence'; " class="btn btn-success" >Fork me on github</button>
-            <button type="button"   " class="btn btn-warning" data-toggle="modal" data-target="#myModal"  >Embedd me in your site</button>
+            <button type="button"  onclick="location.href= 'https://github.com/Bisso1998/StairCase-Sequence'; " class="btn btn-warning" >Embedd me in your site</button>
           </div><!--/.navbar-collapse -->
       </div>
     </nav>
     <!-- end of navbar -->
-    <!-- start of jumbotron  -->
-    <div class="jumbotron" style="background-color: #dd8258; color: white">
-      <div class="container" >
-        <h1 style="font-family: 'Fjalla One', sans-serif;"><b>Easy Password Generator</b></h1>
-        <br>
-        <p>Tired of generating strong passwords having upper case, lower case, numbers and special character?</p>
-        <p><b>TRY</b> easy password generator to generate strong and secured <i style="color: #e5c7b9">yet easy to remember</i> passwords. We use <a href="http://oeis.org/A274945" style="color: #efbca5">staircase numbers</a> to generate your passwords. </p>
-        <p><button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" data-toggle="modal" data-target="#myModal2" >Generate passwords now</button>
-          <button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" data-toggle="modal" data-target="#myModal" >Embedd the password generator</button>
-         </p>
-      </div>
-    </div>
-<!-- end of jumborton -->
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title text-danger"><b>Embedd Password Gen in your site!</b></h4>
-      </div>
-      <div class="modal-body">
-      <!-- create the modal body here -->
-<div class="well well-sm">
-  Copy and paste the following script to iframe our web app:
-
-  <textarea  class="form-control" style="height: 70px; width: 550px;" id="copyThis">
-  <iframe src="http://easypasswordgen.bitballoon.com/embedd" style="border:1px black solid;" name="frame1" scrolling="auto" frameborder="yes" align="left" height = "200px" width = "700px">
-  </iframe>
-  </textarea>
-</div>
-<h5 class="text text-center text-danger"> <b>OR</b> </h5>
-  <div class="well well-sm">
-    Put a hyperlink to our site.
-    <br>
-    <textarea class="form-control" style="height: 70px; width: 550px;">
-      <a href="http://easypasswordgen.bitballoon.com/embedd">Generate easy to remember passwords </a>
-    </textarea>
-  </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-
-
-
-<div class="modal fade" id="myModal2" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title text-danger"><b>Easy Password Generator</b></h4>
-      </div>
-      <div class="modal-body">
-      <!-- create the modal body here -->
-      <h3 class="text text-center text-danger">Head on to the input text field, type your favourite sentence and hit enter to get started </h3>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-
-  </div>
-</div>
+<br><br><br>
 <!-- beginning of container class -->
 <div class="container">
   <h2 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"><b>Enter your favourite sentence to generate password.</b></h2>
   <h4 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"style="font-family: 'Fjalla One', sans-serif;">(Text should NOT contain any number or special character)</h2>
       <p class="text text-center">
-        <input class="form-control" type="text" id="string"  placeholder="Enter text here....."></input>
+        <input class="form-control" type="text" id="string"  placeholder="Enter text here and press enter....."></input>
         <br>
         <button type="button" class="btn btn-block btn-warning " id="passGen" onclick="generate()" id="generate">Generate</button>
       </p>
@@ -207,14 +132,12 @@
       </div>
     </div>
     </div>
-      <br>
-      <br>
+    <br><br>
       <div style="height: 150px; width: 200px">
-        <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=zy5_VY_fJcOUG481iQhTXOn7945LHhCz2SwDaA4UXaI&cl=ffffff&w=a"></script>
         <!-- This script is to keep a count of the users -->
+        <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=zy5_VY_fJcOUG481iQhTXOn7945LHhCz2SwDaA4UXaI&cl=ffffff&w=a"></script>
       </div>
     </div>
-    <br>
       <script src="password_gen.js"></script>
       <script src="shuffle.js"></script>
   </body>
