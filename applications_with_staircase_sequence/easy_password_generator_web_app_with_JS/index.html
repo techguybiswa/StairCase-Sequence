@@ -65,7 +65,7 @@
       <div class="container" >
         <h1 style="font-family: 'Fjalla One', sans-serif;"><b>Easy Password Generator</b></h1>
         <br>
-        <p>Tired of generating strong passwords having upper case, lower case, numbers and special charecters?</p>
+        <p>Tired of generating strong passwords having upper case, lower case, numbers and special character?</p>
         <p><b>TRY</b> easy password generator to generate strong and secured <i style="color: #e5c7b9">yet easy to remember</i> passwords. We use <a href="http://oeis.org/A274945" style="color: #efbca5">staircase numbers</a> to generate your passwords. </p>
         <p><button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" >Generate passwords now</button>
           <button class="btn  btn-lg" style="background-color: #a35d3e;" href="#" role="button" >Embedd the password generator</button>
@@ -76,18 +76,32 @@
 
 <!-- beginning of container class -->
 <div class="container">
-  <h2 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"><b>Enter your favourite sentence in the text box</b></h2>
-  <h4 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"style="font-family: 'Fjalla One', sans-serif;">(Text should NOT contain any number or special charecter)</h2>
+  <h2 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"><b>Enter your favourite sentence to generate password.</b></h2>
+  <h4 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"style="font-family: 'Fjalla One', sans-serif;">(Text should NOT contain any number or special character)</h2>
       <p class="text text-center">
         <input class="form-control" type="text" id="string"  placeholder="Enter text here....."></input>
         <br>
-        <button type="button" class="btn btn-block btn-warning "  onclick="generate()" id="generate">Generate</button>
+        <button type="button" class="btn btn-block btn-warning " id="passGen" onclick="generate()" id="generate">Generate</button>
       </p>
+    <script type="text/javascript">
+
+    document.getElementById("string")
+  .addEventListener("keyup", function(event)
+  {
+    event.preventDefault();
+    if (event.keyCode == 13)
+    {
+        document.getElementById("passGen").click();
+      }
+  });
+
+    </script>
 </div>
 
 <!-- end of container class -->
-    <br>
+
     <div class="container" id="showBlock" style="display: none;">
+      <br><br>
       <h3 class="text text-center text-danger" style="font-family: 'Fjalla One', sans-serif;"><b>YOUR PASSWORD IS</b></h3>
       <div class="well well-sm " style="border: 3px double #bf440b; background-color: #e5b39c;" id="abc">
         <h3 class="text text-danger text-center" id="password"><b></b></h3>

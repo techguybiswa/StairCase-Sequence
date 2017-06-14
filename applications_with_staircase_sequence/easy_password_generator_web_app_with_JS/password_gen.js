@@ -10,8 +10,32 @@ var flag=0;
       alphabetPass = [];
       flag=0;
     }
-    var str,i=0,count;
+    var str = [],i=0,count,flag2 =0;
     str = document.getElementById("string").value;
+     var splChars = "*|,\":<>[]{}`\';()@&$#%1234567890";
+    for (var i = 0; i < str.length; i++)
+     {
+      if ((splChars.indexOf(str.charAt(i)) != -1)||((str[i]==" ")&&(str[i+1]==" ")))
+      {
+        flag2 = 1;
+        break;
+      }
+    }
+    if(flag2 === 1)
+    {
+      alert ("Please do NOT enter special charecters or double space or numbers in the text fiels");
+      window.location.reload();
+    }
+    var strLen;
+    strLen = str.length - 1;
+    console.log("Val of length: " + strLen);
+    console.log(str[strLen]);
+    if(str[strLen]==" ")
+    {
+      console.log("entered condition");
+      str.split().splice(strLen,1).join("");
+      alert("removed extra space");
+    }
     var wordCount = 0;
     // the below function is for counting the number of words in the input text
     for(var j=0;j<str.length;j++)
