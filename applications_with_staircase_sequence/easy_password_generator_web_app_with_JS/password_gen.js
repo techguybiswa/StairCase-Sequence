@@ -3,14 +3,15 @@ var numPass;
 var charPass;
 var flag=0;
 
-  function generate() {
+  function generate()
+   {
 
     if(flag===1)
     {
       alphabetPass = [];
       flag=0;
     }
-    var str = [],i=0,count,flag2 =0;
+    var str,i=0,count,flag2 =0;
     str = document.getElementById("string").value;
      var splChars = "*|,\":<>[]{}`\';()@&$#%1234567890";
     for (var i = 0; i < str.length; i++)
@@ -26,16 +27,16 @@ var flag=0;
       alert ("Please do NOT enter special charecters or double space or numbers in the text fiels");
       window.location.reload();
     }
-    var strLen;
-    strLen = str.length - 1;
-    console.log("Val of length: " + strLen);
-    console.log(str[strLen]);
-    if(str[strLen]==" ")
+    console.log("Length1 : " + str.length);
+    console.log("val  of the length is: " + str.length);
+    var pos = str.length -1;
+    console.log("value at string length index " + str[pos]);
+    if (((str[pos])===" ")||(((str[pos])==="."))||(((str[pos])==="!")))
     {
       console.log("entered condition");
-      str.split().splice(strLen,1).join("");
-      alert("removed extra space");
+      str = str.slice(0, -1);
     }
+    console.log("Length2:  " + (str.length -1));
     var wordCount = 0;
     // the below function is for counting the number of words in the input text
     for(var j=0;j<str.length;j++)
