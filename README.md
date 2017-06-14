@@ -1,6 +1,8 @@
 # The StairCase-Sequence
 A nano project on a novel number sequence.
 
+<b>UPDATE: </b> Check out http://easypasswordgen.bitballoon.com/ to have a look on what we built. It is a JS based password generator that uses staircase numbers to generate easy to remember passwords.
+
 ## A brief intro
 Back in June 2016, I discovered a novel number sequence. Just like the sequence of numbers: 0,1,1,2,3,5,8,13... are named as fibonacci sequence, I named my number sequence as "The staircase sequence". <br>
 Eventually I wrote down my work and the staircase sequence got accepted in the OEIS or the Online Encyclopedia of Integer Sequences. <br>
