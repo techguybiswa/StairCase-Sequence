@@ -1,0 +1,325 @@
+---
+title: 'A274945: Staircase Sequence'
+author: "Enrique Pérez Herrero"
+date: "June 16, 2017"
+output:
+  pdf_document: 
+    number_sections: yes
+  html_document: 
+    number_sections: yes
+---
+
+# Summary
+
+The Staircase Sequence (OEIS: [A274945](https://oeis.org/A274945)), present some
+irregularities at the beggining (below a(84)), but afterwards a general formula 
+can be constructed.
+
+This paper uses a Rmarkdown script using R programming code to construct, and
+test, a general formula for the sequence. For doing first sequence exploration R
+package OEIS.R is used.
+
+A further and more formal mathematical work must be done to derive or simplify
+the formula.
+
+Code to calculate sequence terms is included in the paper.
+
+
+# Packages
+
+## Installing OEIS.R
+
+Installing `OEIS.R` package from [Github](https://github.com/EnriquePH/OEIS.R).
+
+```{r, eval=FALSE}
+library(devtools)
+devtools::install_github("EnriquePH/OEIS.R")
+```
+
+## Loading Packages
+
+```{r}
+library(OEIS.R)
+library(ggplot2)
+```
+
+
+# Loading Staircase Sequence in R
+
+```{r, tidy=TRUE}
+id <- "A274945"
+A274945 <- OEIS_sequence(id)
+A274945$description
+
+A274945$terms
+```
+
+
+# A274945 terms with the same number of digits
+
+```{r}
+# A274945 data from OEIS bfile
+data <- A274945$bfile$data
+# Adding number of decimal digits by term
+data$digits <- nchar(data$A274945)
+
+```
+
+
+## Plotting decimal digits
+
+```{r}
+ggplot(head(data, 2000), aes(x = n, y = digits)) + 
+  geom_line()
+```
+
+
+## Plotting decimal digits frequency
+
+```{r}
+# Digits Frecuency
+df <- data.frame(table(data$digits))
+names(df) <- c("Digits", "Freq")
+
+ggplot(head(df), aes(x = Digits, y = Freq, fill = Freq  == 90)) + 
+  geom_col(width = 0.5)
+```
+
+Observation:
+
+* There are 90 terms of the sequence with the same number of decimal digits,
+except when the number of digits is below 5.
+
+* Thus, the sequence is infinite.
+
+The sequence definition implies that the terms are of the form:
+
+$$a(n) = i(n) \cdot {10}^{(D_{10}(n) - 1)} + 10 \cdot (i(n)^2 + j(n)^2) + j(n)$$
+
+Where:
+
+* $a(n)$ is n-th term of `A274945` sequence.
+
+* $D_{10}(n)$ is the number of decimal digits of $a(n)$
+
+* $i(n)$ is the first decimal digit of $a(n)$.
+
+* $j(n)$ is the last decimal digit of $a(n)$.
+
+
+This is easy to justify because:
+
+$$ i(n) \in \{1, 2, \dots, 9 \} $$
+$$ j(n) \in \{0, 1, \dots, 9 \} $$
+And then $9 \cdot 10 = 90$
+
+# Number of decimal digits.
+
+The first term with n digits is of the form 100...0010, with zeroes filling the figure.
+
+```{r}
+head(data[grep("1.*10$", data$A274945), ])
+```
+
+This implies that the function $D_{10}(n)$ some rounding function like:
+
+$$ D_{10}(n) = \Bigl{\lfloor} \frac{n + 366}{90} \Bigr{\rfloor} - [n < 8] $$
+
+If n < 8 then  $D_{10}(n) = 3$
+
+The symbol [] is 0 if the condition inside is false and 1 if true.
+
+```{r}
+D_10 <- function(n) {
+  floor((n + 366) / 90) + ifelse(n < 8, -1, 0)
+}
+```
+
+## Testing Decimal digits formula.
+
+```{r}
+data$D10 <- D_10(data$n)
+sum(data$D10 == data$digits) / length(data$digits)
+```
+
+It holds for all data.
+
+# Last decimal digit
+
+$j(n)$ can be found easily from the last digit of n, when n > 83.
+
+$$ j(n) = (n-4) - 10 \cdot \Bigl{\lfloor} \frac{n - 4}{10} \Bigr{\rfloor} (n \geq 84) $$
+
+```{r}
+j <- function(n) {
+  (n - 4) %% 10
+}
+
+data$j <- j(data$n)
+```
+
+
+## Test Validity of j(n)
+
+
+```{r}
+data$last <- as.numeric(
+  lapply(data$A274945, function(x)
+    substr(x, nchar(x) , nchar(x))))
+
+# Plot calculated data less sequence data
+ggplot(head(data, 200), aes(x = n, y = j - last)) +
+  geom_line() +
+  geom_point(x = 84, y = 0, color = "red")
+```
+
+
+# First decimal digit
+
+$$ i(n) = 1 + \Bigl{\lfloor} \frac{n - 90 \cdot D_{10}(n) + 366}{10} \Bigr{\rfloor} (n \geq 79) $$
+
+```{r}
+i <- function(n) {
+  1 + floor(((n - 90 * D_10(n) + 366) / 10))
+}
+
+data$i <- i(data$n)
+```
+
+
+## Test Validity of i(n)
+
+```{r}
+data$first <- as.numeric(
+  lapply(data$A274945, function(x)
+    substr(x, 1 , 1)))
+
+# Plot calculated data less sequence data
+ggplot(head(data, 200), aes(x = n, y = i - first)) +
+  geom_line() +
+  geom_point(x = 84, y = 0, color = "red")
+```
+
+
+# Formula for the sequence
+
+```{r}
+a <- function(n) {
+  i(n) * 10 ^ (D_10(n) - 1) + 10 * (i(n)^2 + j(n)^2) + j(n)
+}
+
+data$a <- a(data$n)
+```
+
+## Test Validity of a(n)
+
+```{r}
+# Plot calculated data less sequence data
+ggplot(head(data, 500), aes(x = n, y = a - as.numeric(A274945))) +
+  geom_line() +
+  geom_point(x = 84, y = 0, color = "red")
+```
+
+
+# Generate Sequence as string for larger numbers
+
+The method to speed up calculations and to aviod handling multiprecision numbers
+is to calculate all sequence terms using strings and not numbers.
+
+The strategy is as follows:
+
+1) Find all terms bellow $a(84) = 10010$ by brute force: because, at the 
+beginning, the staircase sequence is very irregular.
+
+2) Construct all terms that have more than 4 decimal digits using character
+strings
+
+3) Bind everything all together.
+
+## Code for covenience functions
+
+```{r}
+
+# Check if number n belogs to staircase sequence
+# This formula is used to brute force calculations.
+isA274945 <- function(n) {
+  n_string <- as.character(n)
+  digits_number <- nchar(n_string)
+  first_digit <- substr(n_string, start = 1L, stop = 1L)
+  last_digit <-
+    substr(n_string, start = digits_number, digits_number)
+  inner_digits <- substr(n_string, start = 2, digits_number - 1L)
+  first_digit <- as.integer(first_digit)
+  last_digit <- as.integer(last_digit)
+  inner_digits <- as.integer(inner_digits)
+  answer <- first_digit ^ 2 + last_digit ^ 2 == inner_digits
+  ifelse(is.na(answer), FALSE, answer)
+}
+
+# Order of the first sequence term with k decimal digits
+# This function is used to generate terms. 
+first_k_digits_term <- function(k) {
+  if (k < 5) {
+    stop("To find terms with less digits than 5, use bruteforce")
+  }
+  (k - 5) * 90 + 84
+} 
+
+# Construct a data.frame with the 90 terms that have k decimal digits
+staircase_k_digits <- function(k) {
+  A <- expand.grid(i = 1:9, j = 0:9)
+  A$n <- first_k_digits_term(k) + 0:89
+  A$central_digits <-
+    mapply(function(x, y)
+      as.character(x ^ 2 + y ^ 2), A$i, A$j)
+  A$central_digits_nchar <- nchar(A$central_digits)
+  A$central_zeroes <-
+    sapply(k - 2 - A$central_digits_nchar, function(x)
+      paste0(rep("0", times = x), collapse = ""))
+  A$A274945 <- paste0(A$i, A$central_zeroes, A$central_digits, A$i)
+  data.frame("n" = A$n, "A274945" = A$A274945)
+}
+
+# Find all terms that are in the sequence less than x, by brute force.
+bruteforce_find_terms <- function(x) {
+  if (x < 110) {
+    stop("no terms below x value, try a higher x")
+  }
+  A <- 110:x
+  A <- A[isA274945(A)]
+  data.frame("n" = 1:length(A), "A274945" = A)
+}
+
+
+# Find all terms that have k or less decimal digits
+staircase_up_to_k_digits <- function(k) {
+  first_terms <- bruteforce_find_terms(10010 - 1)
+  digits <- 5:k
+  last_terms <- lapply(digits, function(k) staircase_k_digits(k))
+  last_terms <- do.call(rbind, last_terms)
+  rbind(first_terms, last_terms)
+}
+```
+
+
+## Find all terms that have less than a given number of digits.
+
+```{r}
+k_digits <- 6
+sequence_A274945 <- staircase_up_to_k_digits(k_digits)
+```
+
+### First terms
+
+```{r}
+head(sequence_A274945)
+```
+
+### Last terms
+
+```{r}
+tail(sequence_A274945)
+```
+
+
+
