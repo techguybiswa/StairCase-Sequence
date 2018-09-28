@@ -37,8 +37,8 @@ int check(int n)
     int firstDigit,lastDigit,digitCount,k;
     digitCount=count(n);                    //The algorith goes like the following:
     k=pow(10,digitCount-1);                 //1. Extract the first digit.
-    firstDigit=n%10;                        //2. Extract the last digit
-    lastDigit=n/k;                          //3. Extract the digits except the first and last digit
+    lastDigit=n%10;                        //2. Extract the last digit
+    firstDigit=n/k;                          //3. Extract the digits except the first and last digit
     n=n%k;                                  //4. Square the first and last digit and add them.
     n=n/10;                                 //5. Check if the summation equals to the number without the first and last digit
     if(((firstDigit*firstDigit)+(lastDigit*lastDigit))==n)
